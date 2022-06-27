@@ -1,0 +1,10 @@
+---
+# handlers file for wazuh-agent
+
+- name: WazuhAgentServiceStartEnableAndReload
+  systemd:
+    name: wazuh-agent
+    daemon_reload: yes
+    enabled: yes
+    state: started
+  

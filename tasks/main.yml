@@ -1,0 +1,6 @@
+- name: Including playbook for Wazuh-agent OS configurations
+  include_tasks: WazuhAgentDebian.yml
+
+- name: Including who data for wazuh agent
+  include_tasks: WhoData.yml
+  when: WhoData

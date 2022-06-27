@@ -1,0 +1,6 @@
+
+- name: Installing wazuh-agent
+  apt:
+    name: auditd
+    state: present
+  notify: WazuhAgentServiceStartEnableAndReload
