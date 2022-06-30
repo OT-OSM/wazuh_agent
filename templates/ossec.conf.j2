@@ -1,5 +1,5 @@
 <!--
-  Wazuh - Agent - Default configuration for ubuntu 20.04
+  Wazuh - Agent - Default configuration for ubuntu {{ ansible_distribution_version }}
   More info at: https://documentation.wazuh.com
   Mailing list: https://groups.google.com/forum/#!forum/wazuh
 -->
@@ -11,7 +11,7 @@
       <port>{{ Port }}</port>
       <protocol>tcp</protocol>
     </server>
-    <config-profile>ubuntu, {{ OsName }}, {{ OsName }}.{{ OsVersion }}</config-profile>
+    <config-profile>ubuntu, {{ ansible_distribution }}{{ ansible_distribution_major_version }}, {{ ansible_distribution }}{{ ansible_distribution_version }}</config-profile>
     <notify_time>{{ NotifyTimeMins }}</notify_time>
     <time-reconnect>{{ TimeReconnectMins }}</time-reconnect>
     <auto_restart>yes</auto_restart>
@@ -149,7 +149,7 @@
 
 {% endif -%}
 
-{% if WhoData == true %}
+{% if UserAudit == true %}
   <syscheck>
     <directories check_all="yes" whodata="yes">/etc</directories>
   </syscheck>

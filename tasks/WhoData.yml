@@ -1,5 +1,5 @@
 
-- name: Installing wazuh-agent
+- name: Installing user audit
   apt:
     name: auditd
     state: present

@@ -18,7 +18,7 @@
 
 - name: Installing wazuh-agent
   apt:
-    name: wazuh-agent={{ WazuhVersion }}
+    name: wazuh-agent={{ WazuhVersion }}-1
     state: present
 
 - name: configuring wazuh agent

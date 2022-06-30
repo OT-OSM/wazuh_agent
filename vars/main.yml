@@ -1,16 +1,13 @@
 ---
 # vars file for wazuh-agent
 
-WazuhVersion: 4.3.4-1
+WazuhVersion: 4.3.4
 ConfigPermission: '0744'
 
 WazuhManagerIp: 172.31.90.179
 
 Port: 1514
 
-OsName: ubuntu20
-
-OsVersion: 04
 NotifyTimeMins: 10
 TimeReconnectMins: 60
 RootcheckFrequencySeconds: 43200
@@ -20,6 +17,6 @@ log_aggregation:
  - { LogFormat: "apache", destination: "/var/log/apache2/access.log" }
 
 
-WhoData: false
+UserAudit: false
 HomeDirectoryCheck: true
 AggregationPermission: false

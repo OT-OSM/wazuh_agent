@@ -5,7 +5,7 @@ Some of the highlighting features are:-
 
   - Setup wazuh agent
   - Enabling FIM over server
-  - Enabling who data informatrion gathering setup over node
+  - Enabling user audit informatrion gathering setup over node
   - Enabling system check over servers home directory.
   - Configure N number of aplication in wazuh agent for log aggregation 
  
@@ -27,8 +27,6 @@ Roles variables are categorized into two divisions i.e. Mandatory and Optional.
 
 |**Variables**|**Default Values**|**Possible Values**|**Type**|**Description**|
 |-------------|------------------|-------------------|--------|---------------|
-| OsName | ubuntu20 |<ul><li>ubuntu18</li><li>ubuntu20</li><li>ubuntu22</li></ul>  | string | Operating system name  |
-| OsVersion | 04 | Include any specific version | string | Operating system version  |
 | WazuhManagerIp | None | Your managers private or public IP address | string | Link agent to manager  |
 
 ```
@@ -40,7 +38,7 @@ Note: It is recommended to enter private ip in WazuhManagerIp  Variable
 
 |**Variables**|**Default Values**|**Possible Values**|**Type**|**Description**|
 |-------------|------------------|-------------------|--------|---------------|
-| WhoData | true | <ul><li>true</li><li>false</li></ul> | boolean  | To gather Who data information |
+| UserAudit | true | <ul><li>true</li><li>false</li></ul> | boolean  | To gather user audit information |
 | HomeDirectoryCheck | true | <ul><li>true</li><li>false</li></ul> | boolean | To Check the Home directory|
 | AggregationPermission | true | <ul><li>true</li><li>false</li></ul> | boolean | To get application data shipped to manager |
 | log_aggregation | None | <ul><li>LogFormat: "apache"</li><li>destination: "/var/log/apache2/error.log"</li></ul> | String | You can add multiple apploication name and its path|
