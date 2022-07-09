@@ -7,11 +7,11 @@
 <ossec_config>
   <client>
     <server>
-      <address>{{ WazuhManagerIp }}</address>
+      <address>{{ WazuhManagerIP }}</address>
       <port>{{ Port }}</port>
       <protocol>tcp</protocol>
     </server>
-    <config-profile>ubuntu, {{ ansible_distribution }}{{ ansible_distribution_major_version }}, {{ ansible_distribution }}{{ ansible_distribution_version }}</config-profile>
+    <config-profile>ubuntu, {{ ansible_distribution }} {{ ansible_distribution_major_version }}, {{ ansible_distribution }} {{ ansible_distribution_version }}</config-profile>
     <notify_time>{{ NotifyTimeMins }}</notify_time>
     <time-reconnect>{{ TimeReconnectMins }}</time-reconnect>
     <auto_restart>yes</auto_restart>
@@ -217,7 +217,7 @@
     <location>/var/log/kern.log</location>
   </localfile>
   
-{% if aggregationPermission == true %}  
+{% if LogAggregationPermission == true %}  
 {% for var in log_aggregation %}
   <localfile>
     <log_format>{{ var.LogFormat }}</log_format>

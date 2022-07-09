@@ -4,7 +4,7 @@ Ansible role to setup & manage Wazuh-Agent
 Some of the highlighting features are:-
 
   - Setup wazuh agent
-  - Enabling FIM over server
+  - Enabling  File Integration Management(FIM) over server
   - Enabling user audit informatrion gathering setup over node
   - Enabling system check over servers home directory.
   - Configure N number of aplication in wazuh agent for log aggregation 
@@ -17,7 +17,7 @@ Some of the highlighting features are:-
 
 ### Requirements
 
-**No third party requirement is needed by this role**
+**UDP port should be open**
 
 ### Roles Variables
 
@@ -27,7 +27,7 @@ Roles variables are categorized into two divisions i.e. Mandatory and Optional.
 
 |**Variables**|**Default Values**|**Possible Values**|**Type**|**Description**|
 |-------------|------------------|-------------------|--------|---------------|
-| WazuhManagerIp | None | Your managers private or public IP address | string | Link agent to manager  |
+| WazuhManagerIP | None | Your managers private or public IP address | string | Link agent to manager  |
 
 ```
 Note: It is recommended to enter private ip in WazuhManagerIp  Variable
@@ -40,8 +40,8 @@ Note: It is recommended to enter private ip in WazuhManagerIp  Variable
 |-------------|------------------|-------------------|--------|---------------|
 | UserAudit | true | <ul><li>true</li><li>false</li></ul> | boolean  | To gather user audit information |
 | HomeDirectoryCheck | true | <ul><li>true</li><li>false</li></ul> | boolean | To Check the Home directory|
-| AggregationPermission | true | <ul><li>true</li><li>false</li></ul> | boolean | To get application data shipped to manager |
-| log_aggregation | None | <ul><li>LogFormat: "apache"</li><li>destination: "/var/log/apache2/error.log"</li></ul> | String | You can add multiple apploication name and its path|
+| LogAggregationPermission | true | <ul><li>true</li><li>false</li></ul> | boolean | To get application log data shipped to manager |
+| log_aggregation | None | <ul><li>LogFormat: "apache"</li><li>destination: "/var/log/apache2/error.log"</li></ul> | String | You can add multiple application log name and its path|
 
 
 

@@ -4,7 +4,7 @@
 WazuhVersion: 4.3.4
 ConfigPermission: '0744'
 
-WazuhManagerIp: 172.31.90.179
+WazuhManagerIP: 172.31.90.179
 
 Port: 1514
 
@@ -19,4 +19,4 @@ log_aggregation:
 
 UserAudit: false
 HomeDirectoryCheck: true
-AggregationPermission: false
+LogAggregationPermission: false
