@@ -14,7 +14,7 @@
 
 - name: Updating apt cache for repo
   apt:
-    update_cache: yes
+    update_cache: true
 
 - name: Installing wazuh-agent
   apt:
@@ -27,6 +27,6 @@
     dest: "{{ ConfigDestWazuh }}"
     mode: "{{ ConfigPermission }}"
   notify: WazuhAgentServiceStartEnableAndReload
-  
 
-  
+- name: Running all handlers
+  meta: flush_handlers

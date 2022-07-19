@@ -2,7 +2,6 @@
 - name: wazuh
   hosts: all
   gather_facts: true
-  become: yes
-  become_user: root
+  become: true
   roles:
-   - { role: wazuh_agent }
+   - {role: wazuh_agent}

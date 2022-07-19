@@ -4,7 +4,6 @@
 - name: WazuhAgentServiceStartEnableAndReload
   systemd:
     name: wazuh-agent
-    daemon_reload: yes
-    enabled: yes
+    daemon_reload: true
+    enabled: true
     state: started
-  
