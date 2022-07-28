@@ -1,0 +1,22 @@
+---
+# vars file for wazuh-agent
+
+WazuhVersion: 4.3.4
+ConfigPermission: '0744'
+
+WazuhManagerIP: 3.144.81.205
+
+Port: 1514
+
+NotifyTimeMins: 10
+TimeReconnectMins: 60
+RootcheckFrequencySeconds: 43200
+
+log_aggregation:
+ - {LogFormat: "apache", destination: "/var/log/apache2/error.log"}
+ - {LogFormat: "apache", destination: "/var/log/apache2/access.log"}
+
+
+UserAudit: true
+HomeDirectoryCheck: true
+LogAggregationPermission: false

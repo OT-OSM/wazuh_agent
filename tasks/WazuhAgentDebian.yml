@@ -1,0 +1,32 @@
+---
+# tasks file for wazuh-agent
+
+- name: Install the GPG key for wazuh agent
+  apt_key:
+    url: "{{ UrlWazuhAgent }}"
+    state: present
+
+- name: Adding wazuh agent repository
+  apt_repository:
+    repo: "{{ RepoWazuhAgent }}"
+    state: present
+    filename: "{{ RepoDest }}"
+
+- name: Updating apt cache for repo
+  apt:
+    update_cache: true
+
+- name: Installing wazuh-agent
+  apt:
+    name: wazuh-agent={{ WazuhVersion }}-1
+    state: present
+
+- name: configuring wazuh agent
+  template:
+    src: "{{ ConfigWazuh }}"
+    dest: "{{ ConfigDestWazuh }}"
+    mode: "{{ ConfigPermission }}"
+  notify: WazuhAgentServiceStartEnableAndReload
+
+- name: Running all handlers
+  meta: flush_handlers

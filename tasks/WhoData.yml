@@ -1,0 +1,6 @@
+---
+- name: Installing user audit
+  apt:
+    name: auditd
+    state: present
+  notify: WazuhAgentServiceStartEnableAndReload

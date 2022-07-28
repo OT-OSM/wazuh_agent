@@ -1,0 +1,12 @@
+---
+# defaults file for wazuh-agent
+
+UrlWazuhAgent: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+
+RepoWazuhAgent: deb https://packages.wazuh.com/4.x/apt/ stable main
+
+RepoDest: /etc/apt/sources.list.d/wazuh.list
+
+ConfigWazuh: ossec.conf.j2
+
+ConfigDestWazuh: /var/ossec/etc/ossec.conf

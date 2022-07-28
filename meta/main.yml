@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: Varghese Kurian
+  description: Ansible role for setting up the Wazuh agent
+  company: Opstree Solutions
+  license: MIT
+
+  min_ansible_version: 2.9
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - Jammy
+
+  galaxy_tags: ["wazuh", "ansible", "automation", "opstree"]
+
+  dependencies: []
