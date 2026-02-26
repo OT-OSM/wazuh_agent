@@ -1,22 +1,40 @@
 ---
-# vars file for wazuh-agent
+# =====================================================
+# PACKAGE DEFINITIONS
+# =====================================================
 
-WazuhVersion: 4.3.4
-ConfigPermission: '0744'
+wazuh_agent_package_debian: "wazuh-agent"
+wazuh_agent_package_rhel: "wazuh-agent"
 
-WazuhManagerIP: 3.144.81.205
+# =====================================================
+# SERVICE
+# =====================================================
 
-Port: 1514
+wazuh_agent_service_name: "wazuh-agent"
 
-NotifyTimeMins: 10
-TimeReconnectMins: 60
-RootcheckFrequencySeconds: 43200
+# =====================================================
+# CONFIGURATION PATH
+# =====================================================
 
-log_aggregation:
- - {LogFormat: "apache", destination: "/var/log/apache2/error.log"}
- - {LogFormat: "apache", destination: "/var/log/apache2/access.log"}
+wazuh_agent_config_file: "/var/ossec/etc/ossec.conf"
 
+# =====================================================
+# REPOSITORY
+# =====================================================
 
-UserAudit: true
-HomeDirectoryCheck: true
-LogAggregationPermission: false
+wazuh_agent_repo_gpg_key_url: "https://packages.wazuh.com/key/GPG-KEY-WAZUH"
+
+wazuh_agent_repo_url_debian: "deb https://packages.wazuh.com/4.x/apt/ stable main"
+
+wazuh_agent_repo_url_rhel: "https://packages.wazuh.com/4.x/yum/"
+
+# =====================================================
+# OS-SPECIFIC PACKAGE RESOLUTION
+# =====================================================
+
+wazuh_agent_package_name: >-
+  {{
+    wazuh_agent_package_debian
+    if ansible_os_family == "Debian"
+    else wazuh_agent_package_rhel
+  }}

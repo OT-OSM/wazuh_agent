@@ -1,0 +1,8 @@
+- name: Deploy ossec.conf
+  ansible.builtin.template:
+    src: ossec.conf.j2
+    dest: "{{ wazuh_agent_config_path }}"
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart wazuh-agent

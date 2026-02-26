@@ -1,9 +1,5 @@
----
-# handlers file for wazuh-agent
-
-- name: WazuhAgentServiceStartEnableAndReload
-  systemd:
+- name: Restart wazuh-agent
+  ansible.builtin.systemd:
     name: wazuh-agent
-    daemon_reload: true
+    state: restarted
     enabled: true
-    state: started
