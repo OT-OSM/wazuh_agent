@@ -5,6 +5,7 @@
 
 <ossec_config>
 
+  <!-- ================= AGENT CONNECTION ================= -->
   <client>
     <server>
       <address>{{ wazuh_agent_manager_host }}</address>
@@ -14,53 +15,92 @@
 
     <notify_time>{{ wazuh_agent_notify_time }}</notify_time>
     <time-reconnect>{{ wazuh_agent_reconnect_time }}</time-reconnect>
+
     <auto_restart>yes</auto_restart>
     <crypto_method>aes</crypto_method>
   </client>
 
+
+  <!-- ================= CLIENT BUFFER ================= -->
   <client_buffer>
     <disabled>no</disabled>
     <queue_size>5000</queue_size>
     <events_per_second>500</events_per_second>
   </client_buffer>
 
-  <!-- Rootcheck -->
+
+  <!-- ================= AGENT LABELS ================= -->
+  <labels>
+    <label key="environment">{{ wazuh_agent_environment | default('production') }}</label>
+    <label key="deployment">ansible</label>
+    <label key="role">endpoint</label>
+    <label key="team">security</label>
+    <label key="region">{{ wazuh_agent_region | default('ap-south-1') }}</label>
+  </labels>
+
+
+  <!-- ================= ROOTCHECK ================= -->
   <rootcheck>
     <disabled>no</disabled>
     <frequency>43200</frequency>
+
     <skip_nfs>yes</skip_nfs>
+
+    <check_files>yes</check_files>
+    <check_trojans>yes</check_trojans>
+    <check_dev>yes</check_dev>
+    <check_sys>yes</check_sys>
+    <check_pids>yes</check_pids>
+    <check_ports>yes</check_ports>
+    <check_if>yes</check_if>
   </rootcheck>
 
-  <!-- Syscollector -->
+
+  <!-- ================= SYSTEM INVENTORY ================= -->
   <wodle name="syscollector">
     <disabled>no</disabled>
     <interval>1h</interval>
     <scan_on_start>yes</scan_on_start>
+
     <hardware>yes</hardware>
     <os>yes</os>
     <network>yes</network>
     <packages>yes</packages>
     <ports all="no">yes</ports>
     <processes>yes</processes>
+
+    <synchronization>
+      <max_eps>10</max_eps>
+    </synchronization>
   </wodle>
 
-  <!-- SCA -->
+
+  <!-- ================= SECURITY CONFIGURATION ASSESSMENT ================= -->
   <sca>
     <enabled>yes</enabled>
     <scan_on_start>yes</scan_on_start>
-    <interval>12h</interval>
+    <skip_nfs>yes</skip_nfs>
   </sca>
 
-  <!-- File Integrity Monitoring -->
+
+  <!-- ================= FILE INTEGRITY MONITORING ================= -->
   <syscheck>
     <disabled>no</disabled>
     <frequency>43200</frequency>
     <scan_on_start>yes</scan_on_start>
-    <directories>/etc,/usr/bin,/usr/sbin,/bin,/sbin,/boot</directories>
+
+    <directories check_all="yes" realtime="yes">/etc</directories>
+    <directories check_all="yes" realtime="yes">/usr/bin</directories>
+    <directories check_all="yes" realtime="yes">/usr/sbin</directories>
+    <directories check_all="yes" realtime="yes">/bin</directories>
+    <directories check_all="yes" realtime="yes">/sbin</directories>
+    <directories check_all="yes" realtime="yes">/boot</directories>
+
     <skip_nfs>yes</skip_nfs>
     <skip_dev>yes</skip_dev>
     <skip_proc>yes</skip_proc>
     <skip_sys>yes</skip_sys>
+  
   </syscheck>
 
 {% if wazuh_agent_home_directory_check %}
@@ -75,16 +115,49 @@
   </syscheck>
 {% endif %}
 
-  <!-- Log Monitoring -->
+
+  <!-- ================= LOG MONITORING ================= -->
 {% for log in wazuh_agent_log_sources %}
   <localfile>
-    <log_format>{{ log.format }}</log_format>
     <location>{{ log.path }}</location>
+    <log_format>{{ log.format }}</log_format>
   </localfile>
 {% endfor %}
 
+  <!-- Default Linux Logs -->
+  <localfile>
+    <location>/var/log/syslog</location>
+    <log_format>syslog</log_format>
+  </localfile>
+
+  <localfile>
+    <location>/var/log/auth.log</location>
+    <log_format>syslog</log_format>
+  </localfile>
+
+
+  <!-- ================= ACTIVE RESPONSE ================= -->
+  <active-response>
+    <disabled>no</disabled>
+  </active-response>
+
+  <!-- ================= AGENT UPGRADE ================= -->
+  <agent-upgrade>
+    <wpk_repository>https://packages.wazuh.com/wpk/</wpk_repository>
+  </agent-upgrade>
+
+
+  <!-- ================= SOCKET ================= -->
+  <socket>
+    <name>wazuh</name>
+    <location>/var/ossec/queue/ossec/queue</location>
+    <mode>tcp</mode>
+  </socket>
+
+
+  <!-- ================= INTERNAL LOGGING ================= -->
   <logging>
-    <log_format>plain</log_format>
+    <log_format>plain,json</log_format>
   </logging>
 
 </ossec_config>

@@ -4,6 +4,12 @@
 wazuh_agent_version: "4.7.0"
 
 # =====================================================
+# AGENT IDENTITY
+# =====================================================
+
+wazuh_agent_name: "{{ inventory_hostname }}"
+
+# =====================================================
 # MANAGER CONNECTION
 # Manager_host should have Private IP
 # =====================================================
@@ -26,6 +32,14 @@ wazuh_agent_registration_password: ""
 # =====================================================
 wazuh_agent_user_audit: true
 wazuh_agent_home_directory_check: true
+
+
+# =====================================================
+# AGENT LABELS
+# =====================================================
+
+wazuh_agent_environment: "production"
+wazuh_agent_role: "linux-server"
 
 # =====================================================
 # CONFIG
