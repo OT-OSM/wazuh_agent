@@ -1,0 +1,16 @@
+- name: Add Wazuh GPG key (Debian)
+  ansible.builtin.apt_key:
+    url: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Add Wazuh repository (Debian)
+  ansible.builtin.apt_repository:
+    repo: "deb https://packages.wazuh.com/4.x/apt/ stable main"
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install wazuh-agent
+  ansible.builtin.package:
+    name: "wazuh-agent={{ wazuh_agent_version }}-1"
+    state: present

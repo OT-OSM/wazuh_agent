@@ -1,19 +1,42 @@
----
 galaxy_info:
-  author: Varghese Kurian
-  description: Ansible role for setting up the Wazuh agent
-  company: Opstree Solutions
+  role_name: wazuh_agent
+  namespace: ot_osm
+  author: Divya Mishra
+  description: >
+    Enterprise-grade Wazuh Agent deployment role designed to integrate
+    seamlessly with the ot_osm.wazuh manager role. Supports secure
+    manager communication, modular configuration, log monitoring,
+    file integrity monitoring (FIM), SCA, and production hardening.
+
+  company: OT-OSM
+
   license: MIT
 
-  min_ansible_version: 2.9
+  min_ansible_version: "2.14"
 
   platforms:
     - name: Ubuntu
       versions:
-        - bionic
-        - focal
-        - Jammy
+        - "20.04"
+        - "22.04"
+        - "24.04"
+    - name: EL
+      versions:
+        - "8"
+        - "9"
 
-  galaxy_tags: ["wazuh", "ansible", "automation", "opstree"]
+  galaxy_tags:
+    - wazuh
+    - agent
+    - siem
+    - security
+    - monitoring
+    - fim
+    - sca
+    - logging
+    - devsecops
+    - endpoint
 
-  dependencies: []
+  galaxy_version: "1.0.0"
+
+dependencies: []

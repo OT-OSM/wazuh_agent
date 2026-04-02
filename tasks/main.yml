@@ -1,7 +1,15 @@
----
-- name: Including playbook for Wazuh-agent OS configurations
-  include_tasks: WazuhAgentDebian.yml
+- name: Validate required variables
+  ansible.builtin.assert:
+    that:
+      - wazuh_agent_manager_host | length > 0
+    fail_msg: "wazuh_agent_manager_host must be defined."
 
-- name: Including who data for wazuh agent
-  include_tasks: WhoData.yml
-  when: UserAudit
+- name: Install wazuh agent
+  ansible.builtin.include_tasks: install.yml
+
+- name: Configure wazuh agent
+  ansible.builtin.include_tasks: configure.yml
+
+- name: Register wazuh agent
+  ansible.builtin.include_tasks: register.yml
+  when: wazuh_agent_auto_register | bool

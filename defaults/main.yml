@@ -1,12 +1,51 @@
----
-# defaults file for wazuh-agent
+# =====================================================
+# VERSION
+# =====================================================
+wazuh_agent_version: "4.7.0"
 
-UrlWazuhAgent: https://packages.wazuh.com/key/GPG-KEY-WAZUH
+# =====================================================
+# AGENT IDENTITY
+# =====================================================
 
-RepoWazuhAgent: deb https://packages.wazuh.com/4.x/apt/ stable main
+wazuh_agent_name: "{{ inventory_hostname }}"
 
-RepoDest: /etc/apt/sources.list.d/wazuh.list
+# =====================================================
+# MANAGER CONNECTION
+# Manager_host should have Private IP
+# =====================================================
 
-ConfigWazuh: ossec.conf.j2
+wazuh_agent_manager_host: "192.168.8.171"
+wazuh_agent_manager_port: 1514
+wazuh_agent_protocol: "tcp"
+wazuh_agent_notify_time: 10
+wazuh_agent_reconnect_time: 60
 
-ConfigDestWazuh: /var/ossec/etc/ossec.conf
+# =====================================================
+# AUTO REGISTRATION
+# =====================================================
+wazuh_agent_auto_register: true
+wazuh_agent_enrollment_port: 1515
+wazuh_agent_registration_password: ""
+
+# =====================================================
+# FEATURES
+# =====================================================
+wazuh_agent_user_audit: true
+wazuh_agent_home_directory_check: true
+
+
+# =====================================================
+# AGENT LABELS
+# =====================================================
+
+wazuh_agent_environment: "production"
+wazuh_agent_role: "linux-server"
+
+# =====================================================
+# CONFIG
+# =====================================================
+wazuh_agent_config_path: "/var/ossec/etc/ossec.conf"
+wazuh_agent_log_sources:
+  - { format: "syslog", path: "/var/log/auth.log" }
+  - { format: "syslog", path: "/var/log/syslog" }
+  - { format: "syslog", path: "/var/log/kern.log" }
